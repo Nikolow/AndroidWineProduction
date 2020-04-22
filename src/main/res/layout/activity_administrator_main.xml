@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdministratorMain">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/selectedWine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Administrator Actions"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="17dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textViewAccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="80dp"
+        android:padding="10dp"
+        android:text="Welcome text"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/BottlingManagment"
+        android:layout_width="223dp"
+        android:layout_marginStart="92dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="484dp"
+        android:text="Bottling Wines"
+        android:background="#4CAF50"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/BottlesManagment"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="252dp"
+        android:background="#4CAF50"
+        android:text="Bottles Management"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/GrapesManagment"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="332dp"
+        android:background="#4CAF50"
+        android:text="Grapes Management"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/WinesManagment"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="408dp"
+        android:background="#4CAF50"
+        android:text="Wines Management"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/UserManagement"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="176dp"
+        android:background="#4CAF50"
+        android:text="User Management"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/AppReport"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="580dp"
+        android:background="@color/colorPrimary"
+        android:text="Application Report"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
