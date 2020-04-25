@@ -31,6 +31,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -304,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Sele
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void undoDeleteUser(final String id, final String username, final String password, final String email, final String access) // restore user
+    private void undoDeleteUser(final String id, final String username, final String email, final String password, final String access) // restore user
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_UNDODELETE,
                 new Response.Listener<String>()
@@ -347,8 +350,8 @@ public class MainActivity extends AppCompatActivity implements UsersAdapter.Sele
                 Map<String, String> params = new HashMap<>();
                 params.put("id", id);
                 params.put("username", username);
-                params.put("password", password);
                 params.put("email", email);
+                params.put("password", password); // няма нужда от хеширане защото е хаширана вече в обекта (иначе ще стане двойно хеширане)
                 params.put("access", access);
                 return params;
             }
