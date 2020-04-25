@@ -9,11 +9,11 @@
 		switch($_GET['apicall']){
 			
 			case 'undodelete':
-				if(isTheseParametersAvailable(array('id','username','password','email','access'))){
+				if(isTheseParametersAvailable(array('id','username','email','password','access'))){
 					$id = $_POST['id']; 
 					$username = $_POST['username']; 
 					$email = $_POST['email']; 
-					$password = $_POST['password']; //md5($_POST['password']);
+					$password = $_POST['password'];
 					$access = $_POST['access']; 
 					
 					$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
@@ -43,8 +43,8 @@
 							$user = array(
 								'id'=>$id, 
 								'username'=>$username, 
-								'password'=>$password,
 								'email'=>$email,
+								'password'=>$password,
 								'access'=>$access
 							);
 							
@@ -123,7 +123,7 @@
 					$id = $_POST['id']; 
 					$username = $_POST['username']; 
 					$email = $_POST['email']; 
-					$password = $_POST['password']; //md5($_POST['password']);
+					$password = $_POST['password'];
 					$access = $_POST['access']; 
 					
 					$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
@@ -133,8 +133,16 @@
 					
 					if($stmt->num_rows > 0)
 					{
-						$stmt = $conn->prepare("UPDATE users SET username=?, email=?, password=?, access=? WHERE id = ?");
-						$stmt->bind_param("sssss", $username, $email, $password, $access, $id);
+						if($password == "AD87109BFFF0765F4DD8CF4943B04D16A4070FEA") //empty
+						{
+							$stmt = $conn->prepare("UPDATE users SET username=?, email=?, access=? WHERE id = ?");
+							$stmt->bind_param("ssss", $username, $email, $access, $id);
+						}
+						else
+						{
+							$stmt = $conn->prepare("UPDATE users SET username=?, email=?, password=?, access=? WHERE id = ?");
+							$stmt->bind_param("sssss", $username, $email, $password, $access, $id);
+						}
 
 						if($stmt->execute())
 						{
@@ -180,7 +188,7 @@
 				if(isTheseParametersAvailable(array('username','password','email','access'))){
 					$username = $_POST['username']; 
 					$email = $_POST['email']; 
-					$password = $_POST['password']; //md5($_POST['password']);
+					$password = $_POST['password'];
 					$access = $_POST['access']; 
 					
 					$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
@@ -231,7 +239,7 @@
 				if(isTheseParametersAvailable(array('username', 'password'))){
 					
 					$username = $_POST['username'];
-					$password = $_POST['password'];//md5($_POST['password']); 
+					$password = $_POST['password'];
 					
 					//$email = "";
 					//$access = "";
@@ -260,8 +268,10 @@
 						$response['error'] = false; 
 						$response['message'] = 'Login successfull'; 
 						$response['user'] = $user; 
-					}else{
-						$response['error'] = false; 
+					}
+					else
+					{
+						$response['error'] = true; 
 						$response['message'] = 'Invalid username or password';
 					}
 				}
