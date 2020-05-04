@@ -121,6 +121,8 @@ public class AddUser extends AppCompatActivity
         final String finalAccess = access;
 
         // POST заявка
+        // http://192.168.1.3:8080/Android/android_1?apicall=signup
+        // URLs.URL_REGISTER
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_REGISTER,
                 new Response.Listener<String>()
                 {

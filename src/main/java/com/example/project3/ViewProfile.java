@@ -171,6 +171,7 @@ public class ViewProfile extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void show_Notification(int white, int red, int glass, int plastic) // самия нотификейшън
     {
+        boolean low = false;
 
         Intent intent=new Intent(getApplicationContext(),AppReport.class);
         String CHANNEL_ID="MYCHANNEL";
@@ -180,29 +181,43 @@ public class ViewProfile extends AppCompatActivity
 
         String result = ""; // резултата който ще го има на нотификешйъна
         if(white < LOW)
+        {
+            low = true;
             result = "White Grapes ("+white+")\n";
+        }
 
         if(red < LOW)
-            result += "Red Grapes ("+red+")\n";
+        {
+            low = true;
+            result += "Red Grapes (" + red + ")\n";
+        }
 
         if(glass < LOW)
-            result += "Glass Bottles ("+glass+")\n";
+        {
+            low = true;
+            result += "Glass Bottles (" + glass + ")\n";
+        }
 
         if(plastic < LOW)
-            result += "Platic Bottles ("+plastic+")";
+        {
+            low = true;
+            result += "Platic Bottles (" + plastic + ")";
+        }
 
+        if(low) // ако има изобщо LOW
+        {
+            Notification notification = new Notification.Builder(getApplicationContext(), CHANNEL_ID)
+                    .setContentText(result)
+                    .setContentTitle("There have LOW quantity..")
+                    .setContentIntent(pendingIntent)
+                    .addAction(android.R.drawable.ic_dialog_dialer, "View Report", pendingIntent) // при натискане ще отиде в Report активитито
+                    .setChannelId(CHANNEL_ID)
+                    .setSmallIcon(android.R.drawable.ic_dialog_info)
+                    .build();
 
-        Notification notification=new Notification.Builder(getApplicationContext(),CHANNEL_ID)
-                .setContentText(result)
-                .setContentTitle("There have LOW quantity..")
-                .setContentIntent(pendingIntent)
-                .addAction(android.R.drawable.ic_dialog_dialer,"View Report",pendingIntent) // при натискане ще отиде в Report активитито
-                .setChannelId(CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
-                .build();
-
-        NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
-        notificationManager.notify(1,notification);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+            notificationManager.notify(1, notification);
+        }
     }
 }
