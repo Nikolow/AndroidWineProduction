@@ -19,6 +19,8 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,8 @@ public class AddBottle extends AppCompatActivity
 
     private RadioGroup radioGroup2;
     private RadioButton radioButton2;
+
+    Logger log = LoggerFactory.getLogger(AddBottle.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,7 +58,6 @@ public class AddBottle extends AppCompatActivity
                 registerBottle(); // влизаме във функцията за създаване на нова бутилка
             }
         });
-
 
         // при натискане на бутона с id button2
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener()
@@ -81,6 +84,7 @@ public class AddBottle extends AppCompatActivity
         {
             editTextBottlename.setError("Please enter name field");
             editTextBottlename.requestFocus();
+            log.info("N.Log : Add Bottle : Empty Name Field!");
             return;
         }
 
@@ -119,6 +123,7 @@ public class AddBottle extends AppCompatActivity
         final String finalMl = ml;
 
 
+        log.info("N.Log : Add Bottle : Creating Request - POST");
         // пост заявка към URL за добавяне на нова бутилка
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_BOTTLE_ADD,
                 new Response.Listener<String>()
@@ -132,6 +137,7 @@ public class AddBottle extends AppCompatActivity
 
                             if (!obj.getBoolean("error")) // ако отговорът който е върнал НЕ Е грешка
                             {
+                                log.info("N.Log : Add Bottle : Send Request without error!");
                                 // финишваме активитито с код 2 и стойност на exit 1 (има промяна)
                                 Intent intent = new Intent();
                                 intent.putExtra("exit", 1);
@@ -140,6 +146,7 @@ public class AddBottle extends AppCompatActivity
                             }
                             else // значи имаме проблем - изписваме какъв е !
                             {
+                                log.info("N.Log : Add Bottle : Send Request - PROBLEM FOUND - "+obj.getString("message"));
                                 Toast.makeText(getApplicationContext(), "PROBLEM: " + obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
 
@@ -156,6 +163,7 @@ public class AddBottle extends AppCompatActivity
                     public void onErrorResponse(VolleyError error)
                     {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        log.info("N.Log : Add Bottle : Error Response - "+ error.getMessage());
                     }
                 })
         {

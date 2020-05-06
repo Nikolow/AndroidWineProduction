@@ -22,6 +22,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,8 @@ import java.util.Map;
 
 public class AddBottling extends AppCompatActivity
 {
+    Logger log = LoggerFactory.getLogger(AddBottle.class);
+
     Spinner spinner_1;
     Spinner spinner_2;
 
@@ -98,6 +102,7 @@ public class AddBottling extends AppCompatActivity
             {
                 name2 = parent.getItemAtPosition(position).toString(); // името е избрания елемент
                 last_selected2 = bottles_list_id.get(position); // последното избрано е позицията на избрания елемент (от id листата) -> реално тук държим ID-то на избрания елемент
+                log.info("N.Log : Add Bottling : Spinner Bottles Selected - "+name2);
             }
 
             @Override
@@ -126,6 +131,7 @@ public class AddBottling extends AppCompatActivity
             {
                 name1 = parent.getItemAtPosition(position).toString();
                 last_selected = wines_list_id.get(position);
+                log.info("N.Log : Add Bottling : Spinner Wines Selected - "+name1);
             }
 
             @Override
@@ -162,6 +168,8 @@ public class AddBottling extends AppCompatActivity
 
                 adapter.notifyDataSetChanged();
                 adapter2.notifyDataSetChanged();
+
+                log.info("N.Log : Add Bottling : Auto Select the first two from the Spinners");
             }
         }.start();
     }
@@ -172,12 +180,14 @@ public class AddBottling extends AppCompatActivity
     {
         if(name1.equals("Select Wine")) // ако е избрано от спинъра първия елемент
         {
+            log.info("N.Log : Add Bottling : No Wine Selected!");
             Toast.makeText(getApplicationContext(), "Please Choose a Wine!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(name2.equals("Select Bottle")) // ако е избрано от спинъра първия елемент
         {
+            log.info("N.Log : Add Bottling : No Bottle Selected!");
             Toast.makeText(getApplicationContext(), "Please Choose a Bottle!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -197,6 +207,7 @@ public class AddBottling extends AppCompatActivity
 
                             if (!obj.getBoolean("error")) // ако отговора е ОК
                             {
+                                log.info("N.Log : Add Bottling : Send Request without error!");
                                 // финиш с код 2 + exit=1 (има промяна)
                                 Intent intent = new Intent();
                                 intent.putExtra("exit", 1);
@@ -205,6 +216,7 @@ public class AddBottling extends AppCompatActivity
                             }
                             else
                             {
+                                log.info("N.Log : Add Bottling : Send Request - PROBLEM FOUND - "+obj.getString("message"));
                                 Toast.makeText(getApplicationContext(), "PROBLEM: " + obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
 
@@ -221,6 +233,7 @@ public class AddBottling extends AppCompatActivity
                     public void onErrorResponse(VolleyError error)
                     {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        log.info("N.Log : Add Bottling : Error Response - "+ error.getMessage());
                     }
                 })
         {
@@ -277,6 +290,9 @@ public class AddBottling extends AppCompatActivity
 
                                 wines_list_name.add(Wine.getString("name") + " (" + grape + ")"); // в листата с вината името е съставено от името + гроздето
                                 wines_list_id.add(Wine.getInt("id")+""); // само ид-тата
+
+                                log.info("N.Log : Get All Wines [Name] - "+ Wine.getString("name") + " (" + grape + ")");
+                                log.info("N.Log : Get All Wines [ID] - "+ Wine.getInt("id"));
                             }
                         } catch (JSONException e)
                         {
@@ -325,6 +341,9 @@ public class AddBottling extends AppCompatActivity
                                 // името на бутилката е създадено от (х мл бутилка - името на бутилкаа)
                                 bottles_list_name.add(Bottle.getInt("ml") + "ml " + bottle_type_name + " Bottle (" + Bottle.getString("name") + ")");
                                 bottles_list_id.add(Bottle.getInt("id")+""); // само ид-тата
+
+                                log.info("N.Log : Get All Bottles [Name] - "+ Bottle.getInt("ml") + "ml " + bottle_type_name + " Bottle (" + Bottle.getString("name") + ")");
+                                log.info("N.Log : Get All Bottles [ID] - "+ Bottle.getInt("id")+"");
                             }
                         } catch (JSONException e)
                         {
@@ -373,6 +392,10 @@ public class AddBottling extends AppCompatActivity
 
                                 grapes_list_name.add(grape_type_name + " " + Grape.getString("name") + " from " + Grape.getString("producer")); // сорта + име на гроздето + на кого е
                                 grapes_list_id.add(Grape.getInt("id")+"");
+
+
+                                log.info("N.Log : Get All Grapes [Name] - "+ grape_type_name + " " + Grape.getString("name") + " from " + Grape.getString("producer"));
+                                log.info("N.Log : Get All Grapes [ID] - "+ Grape.getInt("id")+"");
                             }
                         } catch (JSONException e)
                         {

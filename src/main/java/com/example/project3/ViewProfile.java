@@ -29,6 +29,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ViewProfile extends AppCompatActivity
 {
     TextView textViewUsername, textViewEmail, textViewAccess;
@@ -40,7 +43,6 @@ public class ViewProfile extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-
 
 
         textViewUsername = (TextView) findViewById(R.id.textViewUsername);
