@@ -1,6 +1,7 @@
 # Description
-This is a simple Android Application for Wine Production using Custom WEB API
-Additional: 2 WEB API Versions -> Java & PHP
+This is a simple Android Application for Wine Production using RestAPI
+<br>
+2 API Versions -> Java & PHP
 
 <center>
 
