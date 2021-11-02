@@ -92,3 +92,42 @@ Additional: 2 WEB API Versions -> Java & PHP
 - Name
 - Grape Object
 - Quantity
+
+<center>
+
+![Image](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6c3ead2d-a453-4c41-ac54-2823b27dd966/hr-ross-cooper-2.png)
+
+</center>
+
+# App Report (+Notifications)
+- Using custom notifications
+- Report page with start and end date (with validations)
+- Getting all information about the Wine Production (Wines, Grapes, Bottles, Bottling Process) in details
+
+<center>
+
+![Image](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6c3ead2d-a453-4c41-ac54-2823b27dd966/hr-ross-cooper-2.png)
+
+</center>
+
+# WEB API - Java
+- Using Servlets (GET & POST)
+- Using JDBC Driver
+- Using JSON Arrays & Objects
+- Different cases - Create, Edit, Delete, UndoDelete
+- Servlets for: Bottles, Bottling Process, Grapes, Users, Wines, Report (Information)
+- Validations
+
+<center>
+
+![Image](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6c3ead2d-a453-4c41-ac54-2823b27dd966/hr-ross-cooper-2.png)
+
+</center>
+
+# WEB API - PHP
+- 2 Variants per case - GET & POST
+- Using MYSQLi with prepared statements
+- Different cases - Create, Edit, Delete, UndoDelete
+- Cases: Bottles, Bottling Process, Grapes, Users, Wines, Report (Information)
+- Validations
+- JSON Answers
